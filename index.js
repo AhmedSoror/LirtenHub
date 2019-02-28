@@ -25,6 +25,9 @@ app.use('/api/eventRequest', eventRequest)
 app.use('/api/eventBooking', eventBooking)
 app.use('/api/members', members)
 app.use('/api/reviews', reviews)
+app.use('/api/admins',admins)
+app.use('/api/consaltancyAgencies',consaltancyAgencies)
+
 
 
 // Handling 404

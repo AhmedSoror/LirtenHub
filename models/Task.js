@@ -4,8 +4,8 @@ const uuid = require('uuid')
 
 class Task {
 
-    constructor(taskID,partnerID, consultancyID,description , requiredSkills , payment , finalProduct , timeLine , lifeCycle, category ,
-         yearsOfExperience , done ,  ratePartnerDoer , ratePartnerConsultancy,assignedPerson , postedTime){
+    constructor(partnerID, consultancyID,description , requiredSkills , payment , finalProduct , timeLine , lifeCycle, category ,
+         yearsOfExperience , done ,  ratePartnerDoer , ratePartnerConsultancy,assignedPerson ){
         this.taskID = uuid.v4() ;  
         // this.taskID = taskID ;  ----> for only testing   
         this.partnerID = partnerID ; 

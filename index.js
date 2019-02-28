@@ -1,26 +1,21 @@
 const express = require('express')
 
-const application = require('./routes/api/application')
-const notification = require('./routes/api/notification')
-const partner = require('./routes/api/partner')
+const admins = require('./routes/api/admins')
+const consaltancyAgencies = require('./routes/api/consaltancyAgencies')
 
 const app = express()
 app.use(express.json())
 
 app.get('/', (req, res) => {
-    res.send(`<h2>Welcome</h2> `);
+    res.send(`<h1>Welcome to LirtenHub</h1>
+    <a href="/api/admins">Admins</a>
+    <a href="/api/consaltancyAgencies">Consaltancy Agencies</a>
+    `);
 })
 
-// Direct routes to appropriate files 
-/*
-*/
-app.use('/api/Notification', notification)
-app.use('/api/Partner', partner)
-app.use('/api/Application', application)
+app.use('/api/admins', admins)
+app.use('/api/consaltancyAgencies', consaltancyAgencies)
 
-//to be integrated----------------
-
-// Handling 404
 app.use((req, res) => {
     res.status(404).send({err: 'We can not find what you are looking for'});
  })

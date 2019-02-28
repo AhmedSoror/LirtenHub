@@ -3,7 +3,8 @@ const express = require('express')
 const application = require('./routes/api/application')
 const notification = require('./routes/api/notification')
 const partner = require('./routes/api/partner')
-
+const requests = require('./routes/api/requests')
+const tasks = require('./routes/api/tasks')
 const app = express()
 app.use(express.json())
 
@@ -17,6 +18,8 @@ app.get('/', (req, res) => {
 app.use('/api/Notification', notification)
 app.use('/api/Partner', partner)
 app.use('/api/Application', application)
+app.use('/api/requests', requests)
+app.use('/api/tasks',tasks)
 
 //to be integrated----------------
 

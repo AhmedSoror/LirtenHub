@@ -5,6 +5,8 @@ const eventRequest = require('./routes/api/eventRequest')
 const eventBooking = require('./routes/api/eventBooking')
 const members = require('./routes/api/members')
 const reviews = require('./routes/api/reviews')
+const admins = require('./routes/api/admins')
+const consaltancyAgencies = require('./routes/api/consaltancyAgencies')
 
 const app = express()
 app.use(express.json())

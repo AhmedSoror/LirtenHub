@@ -5,10 +5,10 @@ const ConsaltancyAgency =require('../../models/ConsaltancyAgency');
 const ConsaltancyAgencies =[
     new ConsaltancyAgency('experts','best consaltancy ever','education'
     ,'www.experts.org','experts@gmail.com','5214752','elrehab','exp12345'
-    ,'3','655','eee','ddd','hhh','1'),
+    ,'3','655','eee','ddd','hhh'),
     new ConsaltancyAgency('experts1','best consaltancy ever','education'
     ,'www.experts.org','experts1@gmail.com','5214752','elrehab','exp12345'
-    ,'3','655','eee','ddd','hhh','2')
+    ,'3','655','eee','ddd','hhh')
 ];
 
 // Get all consaltancy agancies
@@ -16,7 +16,7 @@ router.get('/', (req,res) => res.json({ConsaltancyAgencies : ConsaltancyAgencies
 
 // Get a certain consaltancy agancy
 router.get('/:id', (req, res) => {
-    const consaltantId = req.params.id;
+    const consaltantId = (Number)(req.params.id);
     const consaltant =ConsaltancyAgencies.find(consaltant => consaltant.id === consaltantId);
     res.json(consaltant);
 });
@@ -31,11 +31,23 @@ router.post('/', (req, res) => {
     const fax=req.body.fax;
     const address=req.body.address;
     const password=req.body.password;
-    const rate=req.body.rate;
-    const reports=req.body.reports;
-    const boardMembers=req.body.boardMembers;
-    const partners=req.body.partners;
-    const events=req.body.events;
+    
+    const schema = {
+		name: Joi.required(),
+        description: Joi.required(),
+        specialization: Joi.required(),
+        website: Joi.required().url(),
+        mail: Joi.required().email(),
+        fax: Joi.required().fax(),
+        address: Joi.required(),
+        password: Joi.required().password()
+	}
+
+    const result = Joi.validate(req.body, schema);
+
+    if (result.error) return res.status(400).send({ error: result.error.details[0].message });
+
+    
     const consaltant = {
         name: name,
         description: description,
@@ -45,12 +57,12 @@ router.post('/', (req, res) => {
         fax: fax,
         address: address,
         password: password,
-        rate: rate,
-        reports: reports,
-        boardMembers: boardMembers,
-        partners: partners,
-        events: events,
-        id: ConsaltancyAgencies.length+1
+        rate: 0,
+        reports: null,
+        boardMembers: null,
+        partners: null,
+        events: null,
+        
     };
     ConsaltancyAgencies.push(consaltant);
     res.json({ConsaltancyAgencies : ConsaltancyAgencies});
@@ -73,25 +85,25 @@ router.put('/:id', (req, res) => {
     const partners=req.body.partners;
     const events=req.body.events; const adminId = req.params.id; 
     const consaltant = ConsaltancyAgencies.find(consaltant => consaltant.id === consaltantId);
-    consaltant.name=name;
-    consaltant.description=description;
-    consaltant.specialization=specialization;
-    consaltant.website=website;
-    consaltant.mail=mail;
-    consaltant.fax=fax;
-    consaltant.address=address;
-    consaltant.password=password;
-    consaltant.rate=rate;
-    consaltant.reports=reports;
-    consaltant.boardMembers=boardMembers;
-    consaltant.partners=partners;
-    consaltant.events=events;
+    if(name)consaltant.name=name;
+    if(description)consaltant.description=description;
+    if(specialization)consaltant.specialization=specialization;
+    if(nawebsiteme)consaltant.website=website;
+    if(mail)consaltant.mail=mail;
+    if(fax)consaltant.fax=fax;
+    if(address)consaltant.address=address;
+    if(password)consaltant.password=password;
+    if(rate)consaltant.rate=rate;
+    if(reports)consaltant.reports=reports;
+    if(boardMembers)consaltant.boardMembers=boardMembers;
+    if(partners)consaltant.partners=partners;
+    if(events)consaltant.events=events;
     res.json({ConsaltancyAgencies : ConsaltancyAgencies});
 });
 
 
 // Delete a consaltancy agancy
-router.delete(':id', (req, res) => {
+router.delete('/:id', (req, res) => {
     const consaltantId = req.params.id;
     const consaltant = ConsaltancyAgencies.find(consaltant => consaltant.id === consaltantId);
     const index = ConsaltancyAgencies.indexOf(consaltant);

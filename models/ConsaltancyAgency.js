@@ -1,9 +1,9 @@
-//const uuid =require(uuid);
+const uuid =require('uuid');
 
 class ConsaltancyAgency{
     constructor(name,description,specialization,website,
         mail,fax,address,password,rate,reports,
-        boardMembers,partners,events,id){
+        boardMembers,partners,events){
         this.name=name;
         this.description=description;
         this.specialization=specialization;
@@ -17,7 +17,7 @@ class ConsaltancyAgency{
         this.boardMembers=boardMembers;
         this.partners=partners;
         this.events=events;
-        this.id = id;
+        this.id = uuid.v4();
     }
 };
 

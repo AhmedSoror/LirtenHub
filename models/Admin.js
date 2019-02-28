@@ -1,12 +1,13 @@
-//const uuid =require(uuid);
+const uuid =require('uuid');
 
 class Admin{
-    constructor(name,mail,passward,phone,id){
+    constructor(name,mail,passward,phone){
         this.name=name;
         this.mail=mail;
         this.passward=passward;
         this.phone=phone;
-        this.id = id;
+        this.id = uuid.v4();
+        
     }
 };
 

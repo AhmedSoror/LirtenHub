@@ -33,8 +33,6 @@ class Partner{
         this.password=password;
         this.id= uuid.v4();
     };
-    
-    
 }
 
 module.exports = Partner;

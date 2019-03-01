@@ -14,7 +14,6 @@ class Event {
         organizerId,
         eventRequestId
         )
-        
         {
         this.eventId = uuid.v4();
         this.location=location;
@@ -33,3 +32,5 @@ class Event {
 }
 
 module.exports = Event
+
+///hkjhfsdkjhgskdjhfgskjdfh

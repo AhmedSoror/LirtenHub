@@ -13,6 +13,9 @@ class Event {
         dateTime,
         organizerId,
         eventRequestId
+
+
+
         )
         {
         this.eventId = uuid.v4();

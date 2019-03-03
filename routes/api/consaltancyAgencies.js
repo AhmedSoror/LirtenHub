@@ -1,5 +1,7 @@
 const express = require('express');
+const uuid =require('uuid');
 const router = express.Router();
+const Joi = require('joi');
 const ConsaltancyAgency =require('../../models/ConsaltancyAgency');
 
 const ConsaltancyAgencies =[
@@ -16,7 +18,7 @@ router.get('/', (req,res) => res.json({ConsaltancyAgencies : ConsaltancyAgencies
 
 // Get a certain consaltancy agancy
 router.get('/:id', (req, res) => {
-    const consaltantId = (Number)(req.params.id);
+    const consaltantId = req.params.id;
     const consaltant =ConsaltancyAgencies.find(consaltant => consaltant.id === consaltantId);
     res.json(consaltant);
 });
@@ -36,11 +38,11 @@ router.post('/', (req, res) => {
 		name: Joi.required(),
         description: Joi.required(),
         specialization: Joi.required(),
-        website: Joi.required().url(),
-        mail: Joi.required().email(),
-        fax: Joi.required().fax(),
+        website: Joi.required(),
+        mail: Joi.required(),
+        fax: Joi.required(),
         address: Joi.required(),
-        password: Joi.required().password()
+        password: Joi.required()
 	}
 
     const result = Joi.validate(req.body, schema);
@@ -62,7 +64,7 @@ router.post('/', (req, res) => {
         boardMembers: null,
         partners: null,
         events: null,
-        
+        id:uuid.v4()
     };
     ConsaltancyAgencies.push(consaltant);
     res.json({ConsaltancyAgencies : ConsaltancyAgencies});
@@ -83,12 +85,12 @@ router.put('/:id', (req, res) => {
     const reports=req.body.reports;
     const boardMembers=req.body.boardMembers;
     const partners=req.body.partners;
-    const events=req.body.events; const adminId = req.params.id; 
+    const events=req.body.events; 
     const consaltant = ConsaltancyAgencies.find(consaltant => consaltant.id === consaltantId);
     if(name)consaltant.name=name;
     if(description)consaltant.description=description;
     if(specialization)consaltant.specialization=specialization;
-    if(nawebsiteme)consaltant.website=website;
+    if(website)consaltant.website=website;
     if(mail)consaltant.mail=mail;
     if(fax)consaltant.fax=fax;
     if(address)consaltant.address=address;

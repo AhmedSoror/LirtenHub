@@ -1,4 +1,5 @@
 const express = require('express');
+const uuid =require('uuid');
 const router = express.Router();
 const Admin =require('../../models/Admin');
 const Joi = require('joi');
@@ -13,9 +14,9 @@ router.get('/', (req,res) => res.json({admins : admins}));
 
 // Get a certain admin
 router.get('/:id', (req, res) => {
-    const adminId = (Number)(req.params.id);
+    const adminId = req.params.id;
     const admin =admins.find(admin => admin.id === adminId);  
-    return res.json(admin);
+    res.json(admin);
 });
 
 
@@ -42,11 +43,11 @@ router.post('/', (req, res) => {
         mail: mail,
         password: password,
         phone: phone,
-       
+        id:uuid.v4()
     };
     
-   // admins.push(admin);
-    res.json({admin});
+    admins.push(admin);
+    res.json({admins : admins});
 });
 
 // Update a admin info

@@ -16,6 +16,8 @@ app.get('/', (req, res) => {
     <a href="/api/event">Event</a>
     <a href="/api/eventRequest">Event Request</a>
     <a href="/api/eventBooking">Event Booking</a>
+    <a href="/api/admins">Admins</a>
+    <a href="/api/consaltancyAgencies">Consaltancy agencies</a>
     `);
 })
 

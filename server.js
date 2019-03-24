@@ -22,7 +22,6 @@ const app = express()
 
 
 app.use(express.json())
-
 mongoose.connect(config.mongoURI, { useNewUrlParser: true })
     .then(() => console.log('We are connected to MongoDB'))
     .catch(err => console.log(err))
